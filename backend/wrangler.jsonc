@@ -12,7 +12,8 @@
   // Our .env is consumed only by the Prisma CLI via prisma.config.ts —
   // it never reaches the Worker. Keep both files in sync manually.
   "vars": {
-    "CORS_ORIGIN": "http://localhost:5173"
+    // Comma-separated list of exact allowed origins (see src/index.ts).
+    "CORS_ORIGIN": "http://localhost:5173,https://frontend-eight-pied-56.vercel.app,https://frontend-itsthearsh-4315s-projects.vercel.app,https://frontend-itsthearsh-4315-itsthearsh-4315s-projects.vercel.app"
   }
   // "kv_namespaces": [
   //   {
