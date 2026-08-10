@@ -1,0 +1,43 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "backend",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-08",
+  "compatibility_flags": ["nodejs_compat"],
+  // Non-secret vars only. DATABASE_URL and JWT_SECRET are secrets:
+  // - local dev reads them from .dev.vars (wrangler-native, gitignored)
+  // - production is set via `wrangler secret put <NAME>`
+  // Cloudflare docs: if a .dev.vars file exists, wrangler dev excludes the
+  // root .env entirely from the Worker's runtime env (no merge, no override).
+  // Our .env is consumed only by the Prisma CLI via prisma.config.ts —
+  // it never reaches the Worker. Keep both files in sync manually.
+  "vars": {
+    "CORS_ORIGIN": "http://localhost:5173"
+  }
+  // "kv_namespaces": [
+  //   {
+  //     "binding": "MY_KV_NAMESPACE",
+  //     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  //   }
+  // ],
+  // "r2_buckets": [
+  //   {
+  //     "binding": "MY_BUCKET",
+  //     "bucket_name": "my-bucket"
+  //   }
+  // ],
+  // "d1_databases": [
+  //   {
+  //     "binding": "MY_DB",
+  //     "database_name": "my-database",
+  //     "database_id": ""
+  //   }
+  // ],
+  // "ai": {
+  //   "binding": "AI"
+  // },
+  // "observability": {
+  //   "enabled": true,
+  //   "head_sampling_rate": 1
+  // }
+}

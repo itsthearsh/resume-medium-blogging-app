@@ -1,0 +1,54 @@
+// Used by the Worker (src/lib/prisma.ts) — targets the Workers runtime.
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  runtime  = "workerd"
+}
+
+// Used only by the Node seed script (prisma/seed.ts) — normal Node client,
+// NOT the workerd-targeted one above.
+generator seedClient {
+  provider = "prisma-client"
+  output   = "./generated/prisma-node"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         String      @id @default(uuid())
+  email      String      @unique
+  password   String
+  name       String?
+  posts      Post[]
+  savedPosts SavedPost[]
+}
+
+model Post {
+  id         String      @id @default(uuid())
+  title      String
+  content    String
+  published  Boolean     @default(false)
+  createdAt  DateTime    @default(now())
+  authorId   String
+  author     User        @relation(fields: [authorId], references: [id])
+  tags       Tag[]
+  savedBy    SavedPost[]
+}
+
+model Tag {
+  id    String @id @default(uuid())
+  name  String @unique
+  posts Post[]
+}
+
+model SavedPost {
+  id     String @id @default(uuid())
+  userId String
+  postId String
+  user   User   @relation(fields: [userId], references: [id])
+  post   Post   @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId])
+}
