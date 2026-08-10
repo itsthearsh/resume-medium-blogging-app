@@ -8,6 +8,9 @@
 - GET /api/v1/blog/bulk — all posts
 - GET /api/v1/blog/:id — single post
 - DELETE /api/v1/blog/:id — delete post (auth + owner-only)
+- POST /api/v1/blog/:id/bookmark — toggle bookmark for current user (auth)
+- GET /api/v1/blog/bookmarks/mine — current user's bookmarked posts (auth)
+- GET /api/v1/tags — list the 10 fixed tags
 - Auth middleware on all blog write routes
 - hono/cors middleware enabled
 
@@ -28,6 +31,8 @@
 - Blogs listing page (BlogCard + NavBar components)
 - Single blog page
 - Publish/create blog page
+- Saved Posts page (/saved, SavedPosts.tsx) — lists the current user's bookmarked posts via GET /api/v1/blog/bookmarks/mine
+- Loading indicators (isLoading state + skeleton/spinner) on every page that fetches data
 - axios with JWT from localStorage in headers
 
 ### Advance features (all required)
@@ -37,6 +42,8 @@
 - Tag system — select from 10 fixed tags when publishing, display on cards
 - Persisted bookmarks via SavedPost model (BookmarkPlus icon toggles + saves to DB)
 - Functional icon buttons: BookmarkPlus, CircleMinus, Ellipsis (lucide-react)
+  - Ellipsis opens a dropdown with Edit and Delete, shown only on the current user's own posts
+  - Edit opens a page/modal that wires to PUT /api/v1/blog
 
 ### Deployment
 - Backend → Cloudflare Workers
