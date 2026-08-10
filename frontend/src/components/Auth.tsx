@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import type { SignupInput, SigninInput } from "@itsthearsh/common-blog-app";
 import { api } from "../lib/api";
 import { setToken } from "../lib/auth";
 
@@ -21,7 +22,8 @@ export function Auth({ type }: AuthProps) {
     setError(null);
     setIsSubmitting(true);
     try {
-      const payload = type === "signup" ? { name, email, password } : { email, password };
+      const payload: SignupInput | SigninInput =
+        type === "signup" ? { name, email, password } : { email, password };
       const res = await api.post(`/api/v1/user/${type}`, payload);
       setToken(res.data.jwt);
       navigate("/");

@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { getPrisma } from "../lib/prisma";
 import { authMiddleware } from "../middleware/auth";
-import { createBlogInput, updateBlogInput } from "../zod/schemas";
+import { createBlogInput, updateBlogInput } from "@itsthearsh/common-blog-app";
 import type { Bindings, Variables } from "../types";
 
 const blogRouter = new Hono<{ Bindings: Bindings; Variables: Variables }>();

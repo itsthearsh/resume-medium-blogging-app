@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { sign } from "hono/jwt";
 import bcrypt from "bcryptjs";
 import { getPrisma } from "../lib/prisma";
-import { signupInput, signinInput } from "../zod/schemas";
+import { signupInput, signinInput } from "@itsthearsh/common-blog-app";
 import type { Bindings } from "../types";
 
 const userRouter = new Hono<{ Bindings: Bindings }>();

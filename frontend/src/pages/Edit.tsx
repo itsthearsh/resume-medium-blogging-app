@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import type { UpdateBlogInput } from "@itsthearsh/common-blog-app";
 import { NavBar } from "../components/NavBar";
 import { BlogForm, type BlogFormValues } from "../components/BlogForm";
 import { FullPageSpinner } from "../components/Skeleton";
@@ -28,10 +29,11 @@ export function Edit() {
     );
   }
 
-  async function handleSubmit(values: BlogFormValues) {
-    await api.put("/api/v1/blog", { id, ...values });
-    navigate(`/blog/${id}`);
-  }
+  const handleSubmit = async (values: BlogFormValues) => {
+    const payload: UpdateBlogInput = { id: post.id, ...values };
+    await api.put("/api/v1/blog", payload);
+    navigate(`/blog/${post.id}`);
+  };
 
   return (
     <div>

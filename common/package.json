@@ -1,0 +1,35 @@
+{
+  "name": "@itsthearsh/common-blog-app",
+  "version": "1.0.0",
+  "description": "Shared Zod schemas and types for the resume-medium-blogging-app backend and frontend",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [],
+  "author": "itsthearsh",
+  "license": "ISC",
+  "peerDependencies": {
+    "zod": "^4"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "zod": "^4.4.3"
+  }
+}
